@@ -131,3 +131,47 @@ Parts of this project are based on the following repositories:
 
 ## License
 [License](LICENSE.md)
+
+
+Step-1: Compute Lidar point cloud from Range Imag
+
+The initial step involves generating a Lidar point cloud from a range image. This is accomplished by initially examining the range image and converting its range and intensity channels into an 8-bit format. Subsequently, we utilize the openCV library to stack the range and intensity channels vertically, allowing us to visualize the image.
+
+To accomplish this, we convert the "range" channel to 8-bit format and also convert the "intensity" channel to 8-bit format. We then proceed to crop the range image to include only the area within +/- 90 degrees to the left and right of the forward-facing x-axis. Finally, we use the openCV library to vertically stack the range and intensity channels, and these changes are implemented in the 'loop_over_dataset.py' script.
+
+result: 
+
+range image
+![image](https://user-images.githubusercontent.com/38068231/228829523-99c435c0-5744-4e26-a101-b40661c184ee.png)
+![image](https://user-images.githubusercontent.com/38068231/228829965-aaefbcbc-9f77-4cec-93e8-c38eb0141521.png)
+
+point cloud
+![image](https://user-images.githubusercontent.com/38068231/228829886-bb1d7ee8-617a-4746-aa7c-55508644ff20.png)
+
+Step-2: Create Birds-Eye View from Lidar PCL
+Firstly, the coordinates are transformed into their corresponding pixel values. Following this, the lidar intensity values are assigned to the bird's eye view (BEV) mapping. The sorted and pruned point cloud lidar obtained from the previous task is utilized here. The height map present in the BEV is normalized before proceeding to compute and map the intensity values. These steps are undertaken to generate a comprehensive BEV representation of the scene, which can be used for further analysis and processing.
+
+point cloud:
+![image](https://user-images.githubusercontent.com/38068231/228831012-4bcedc61-6d8d-48d0-a3b8-e7bcb7e0f20f.png)
+
+Compute intensity layer of the BEV map:
+![image](https://user-images.githubusercontent.com/38068231/228831543-398d9701-d43c-4487-ad4c-15055129d944.png)
+
+Section 3 : Model-based Object Detection in BEV Image
+Initially, we clone the repository and focus on the 'test.py' file for the current task. The necessary configurations are extracted from 'parse_test_configs()' and included in the 'load_configs_model' configuration structure. This is done to streamline the process of using the fpn resnet model from the cloned repository.
+
+Once the model is instantiated, the 3D bounding boxes are extracted from the responses. These boxes are then converted from pixel coordinates to vehicle coordinates. The model output is configured to be in the bounding box format [class-id, x, y, z, h, w, l, yaw] for ease of use and further processing.
+result:
+![image](https://user-images.githubusercontent.com/38068231/228832406-3d4bcaf0-1a67-49d3-a7a7-ce7ae6cebc69.png)
+
+Section 4 : Performance Evaluation for Object Detection
+The current step involves computing the performance of the detection model by determining the intersection over union (IOU) between the labels and detections. False positive and false negative values are then computed based on these results. The primary task is to establish the geometric overlap between the bounding boxes of the labels and detected objects.
+
+To accomplish this, detected objects are assigned to labels if the IOU exceeds a specified threshold. The degree of geometric overlap between the bounding boxes is computed to identify the best matches for multiple objects/detections. These matches are selected based on the maximum IOU. Finally, the false negative and false positive values are calculated. Precision and recall are also determined based on the false positive and false negative values, providing a comprehensive understanding of the model's performance.
+
+results:
+![image](https://user-images.githubusercontent.com/38068231/228836094-45cc2e41-399d-4650-8d1d-504e86874f53.png)
+
+results with configs_det.use_labels_as_objects=True
+![image](https://user-images.githubusercontent.com/38068231/228836712-00ee6b33-06fb-4b39-96cc-7ad09b7174a1.png)
+

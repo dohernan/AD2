@@ -149,6 +149,7 @@ point cloud
 ![image](https://user-images.githubusercontent.com/38068231/228829886-bb1d7ee8-617a-4746-aa7c-55508644ff20.png)
 
 Step-2: Create Birds-Eye View from Lidar PCL
+
 Firstly, the coordinates are transformed into their corresponding pixel values. Following this, the lidar intensity values are assigned to the bird's eye view (BEV) mapping. The sorted and pruned point cloud lidar obtained from the previous task is utilized here. The height map present in the BEV is normalized before proceeding to compute and map the intensity values. These steps are undertaken to generate a comprehensive BEV representation of the scene, which can be used for further analysis and processing.
 
 point cloud:
@@ -158,6 +159,7 @@ Compute intensity layer of the BEV map:
 ![image](https://user-images.githubusercontent.com/38068231/228831543-398d9701-d43c-4487-ad4c-15055129d944.png)
 
 Section 3 : Model-based Object Detection in BEV Image
+
 Initially, we clone the repository and focus on the 'test.py' file for the current task. The necessary configurations are extracted from 'parse_test_configs()' and included in the 'load_configs_model' configuration structure. This is done to streamline the process of using the fpn resnet model from the cloned repository.
 
 Once the model is instantiated, the 3D bounding boxes are extracted from the responses. These boxes are then converted from pixel coordinates to vehicle coordinates. The model output is configured to be in the bounding box format [class-id, x, y, z, h, w, l, yaw] for ease of use and further processing.
@@ -165,6 +167,7 @@ result:
 ![image](https://user-images.githubusercontent.com/38068231/228832406-3d4bcaf0-1a67-49d3-a7a7-ce7ae6cebc69.png)
 
 Section 4 : Performance Evaluation for Object Detection
+
 The current step involves computing the performance of the detection model by determining the intersection over union (IOU) between the labels and detections. False positive and false negative values are then computed based on these results. The primary task is to establish the geometric overlap between the bounding boxes of the labels and detected objects.
 
 To accomplish this, detected objects are assigned to labels if the IOU exceeds a specified threshold. The degree of geometric overlap between the bounding boxes is computed to identify the best matches for multiple objects/detections. These matches are selected based on the maximum IOU. Finally, the false negative and false positive values are calculated. Precision and recall are also determined based on the false positive and false negative values, providing a comprehensive understanding of the model's performance.

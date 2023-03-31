@@ -150,10 +150,13 @@ point cloud
 ![image](https://user-images.githubusercontent.com/38068231/228829886-bb1d7ee8-617a-4746-aa7c-55508644ff20.png)
 
 Examples of vehicles:
-![image](https://user-images.githubusercontent.com/38068231/229065098-84386f6e-4fa8-4e5c-a8b0-e2a8ee87cb65.png)
-![image](https://user-images.githubusercontent.com/38068231/229065177-aa0abc01-7fd3-42d6-8a41-5a531551f918.png)
-![image](https://user-images.githubusercontent.com/38068231/229065245-368f39db-d678-4c2b-86fa-a31e6a5c0085.png)
-![image](https://user-images.githubusercontent.com/38068231/229065269-b0d61b3b-1ca0-4e80-90cf-10137002b5c2.png)
+![image](https://user-images.githubusercontent.com/38068231/229079003-8a6d14ad-d693-438f-ba0c-91635175b134.png)
+![image](https://user-images.githubusercontent.com/38068231/229079031-d30ee75e-5da2-4531-8713-6aab10705f2e.png)
+![image](https://user-images.githubusercontent.com/38068231/229079049-2f49b85e-1761-40b8-9a3c-2b47451871b6.png)
+vehicles from far away
+![image](https://user-images.githubusercontent.com/38068231/229079091-10c2fff0-4036-44f0-a65a-64c2cb5db076.png)
+![image](https://user-images.githubusercontent.com/38068231/229079118-dbe686a2-0748-4851-9881-dadd04d5868a.png)
+
 
 By analyzing the distribution and arrangement of these point cloud views, we can identify the stable features of the vehicle that are common across different viewpoints.
 The rear bumper is a stable feature that can be easily recognized since it is typically a distinctive shape and often located at the rear of the vehicle. The tires are also stable features since they are round and located at the corners of the vehicle. Side mirrors are also often identifiable due to their unique shape and location.

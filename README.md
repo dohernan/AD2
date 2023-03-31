@@ -152,7 +152,10 @@ point cloud
 Examples of vehicles:
 ![image](https://user-images.githubusercontent.com/38068231/229079003-8a6d14ad-d693-438f-ba0c-91635175b134.png)
 ![image](https://user-images.githubusercontent.com/38068231/229079031-d30ee75e-5da2-4531-8713-6aab10705f2e.png)
-![image](https://user-images.githubusercontent.com/38068231/229079049-2f49b85e-1761-40b8-9a3c-2b47451871b6.png)
+![image](https://user-images.githubusercontent.com/38068231/229079318-02a92a3e-f83c-446e-b8ba-2ca4c268a43d.png)
+![image](https://user-images.githubusercontent.com/38068231/229079377-1a0be465-88f7-4ebd-bd04-fba830f7de5d.png)
+![image](https://user-images.githubusercontent.com/38068231/229079403-90ee8d05-1142-467b-9435-a145aca7e131.png)
+
 vehicles from far away
 ![image](https://user-images.githubusercontent.com/38068231/229079091-10c2fff0-4036-44f0-a65a-64c2cb5db076.png)
 ![image](https://user-images.githubusercontent.com/38068231/229079118-dbe686a2-0748-4851-9881-dadd04d5868a.png)

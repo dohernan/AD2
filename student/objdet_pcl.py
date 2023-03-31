@@ -84,6 +84,10 @@ def show_range_image(frame, lidar_name):
     img_intensity = ri_intensity.astype(np.uint8)
     # step 6 : stack the range and intensity image vertically using np.vstack and convert the result to an unsigned 8-bit integer
     img_range_intensity = np.vstack((img_range,img_intensity))
+
+    degrees_90 = int(img_range_intensity.shape[1] / 4)
+    ri_center = int(img_range_intensity.shape[1] / 2)
+    img_range_intensity = img_range_intensity[:,(ri_center - degrees_90):(ri_center + degrees_90)]
     #######
     ####### ID_S1_EX1 END #######     
     
@@ -116,7 +120,7 @@ def bev_from_pcl(lidar_pcl, configs, frame_num):
     # step 3 : perform the same operation as in step 2 for the y-coordinates but make sure that no negative bev-coordinates occur
     lidar_pcl_cpy[:, 1] = np.int_(np.floor(lidar_pcl_cpy[:, 1] / bev_discret) + (configs.bev_width + 1) / 2)
     # step 4 : visualize point-cloud using the function show_pcl from a previous task
-    #show_pcl(lidar_pcl_cpy, frame_num)
+    show_pcl(lidar_pcl_cpy, frame_num)
     #######
     ####### ID_S2_EX1 END #######     
     
@@ -146,7 +150,9 @@ def bev_from_pcl(lidar_pcl, configs, frame_num):
     ## step 5 : temporarily visualize the intensity map using OpenCV to make sure that vehicles separate well from the background
     intensity_map_to_visualize = intensity_map * 256
     intensity_map_to_visualize = intensity_map_to_visualize.astype(np.uint8)
+
     #cv2.imshow('intensity_map', intensity_map_to_visualize)
+
     #######
     ####### ID_S2_EX2 END ####### 
 

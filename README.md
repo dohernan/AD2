@@ -135,6 +135,7 @@ Parts of this project are based on the following repositories:
 
 Step-1: Compute Lidar point cloud from Range Imag
 
+
 The initial step involves generating a Lidar point cloud from a range image. This is accomplished by initially examining the range image and converting its range and intensity channels into an 8-bit format. Subsequently, we utilize the openCV library to stack the range and intensity channels vertically, allowing us to visualize the image.
 
 To accomplish this, we convert the "range" channel to 8-bit format and also convert the "intensity" channel to 8-bit format. We then proceed to crop the range image to include only the area within +/- 90 degrees to the left and right of the forward-facing x-axis. Finally, we use the openCV library to vertically stack the range and intensity channels, and these changes are implemented in the 'loop_over_dataset.py' script.
@@ -147,6 +148,17 @@ range image
 
 point cloud
 ![image](https://user-images.githubusercontent.com/38068231/228829886-bb1d7ee8-617a-4746-aa7c-55508644ff20.png)
+
+Examples of vehicles:
+![image](https://user-images.githubusercontent.com/38068231/229065098-84386f6e-4fa8-4e5c-a8b0-e2a8ee87cb65.png)
+![image](https://user-images.githubusercontent.com/38068231/229065177-aa0abc01-7fd3-42d6-8a41-5a531551f918.png)
+![image](https://user-images.githubusercontent.com/38068231/229065245-368f39db-d678-4c2b-86fa-a31e6a5c0085.png)
+![image](https://user-images.githubusercontent.com/38068231/229065269-b0d61b3b-1ca0-4e80-90cf-10137002b5c2.png)
+
+By analyzing the distribution and arrangement of these point cloud views, we can identify the stable features of the vehicle that are common across different viewpoints.
+The rear bumper is a stable feature that can be easily recognized since it is typically a distinctive shape and often located at the rear of the vehicle. The tires are also stable features since they are round and located at the corners of the vehicle. Side mirrors are also often identifiable due to their unique shape and location.
+The chassis is the most frequent feature to be identified since it is the fundamental structure of the vehicle.
+
 
 Step-2: Create Birds-Eye View from Lidar PCL
 

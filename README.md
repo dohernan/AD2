@@ -196,3 +196,46 @@ results:
 results with configs_det.use_labels_as_objects=True
 ![image](https://user-images.githubusercontent.com/38068231/228836712-00ee6b33-06fb-4b39-96cc-7ad09b7174a1.png)
 
+
+ **Object tracking** 
+ 
+This part of the project aims to develop a tracking system for autonomous driving using a combination of LiDAR and camera sensors. The code implements four main functions used for tracking (explained in detail below): Extended Kalman Filter (EKF), track management, data association, and camera-LiDAR sensor fusion. The goal is to accurately track vehicles, which is essential for safe and reliable autonomous driving, on some waymo dataset segments. The project evaluates the performance of the implemented system by measuring the root mean squared error (RMSE) of the estimated object positions.
+
+Extended Kalman Filter (EKF): EKF is a mathematical algorithm that uses a series of measurements observed over time to estimate the state of a system with uncertain or noisy measurements. In the context of autonomous driving tracking, the EKF is used to estimate the state of the vehicle and predict its future trajectory based on sensor measurements.
+In the programming project, an EKF algorithm was implemented to estimate the position and velocity of the vehicle using sensor measurements from various sources.
+
+Track management: Track management is the process of keeping track of multiple objects in the environment and updating their positions as they move. In the context of autonomous driving, track management is used to keep track of other vehicles, pedestrians, and obstacles on the road.
+
+Data association: Data association is the process of associating sensor measurements with existing tracks. 
+
+Camera-LiDAR sensor fusion: Camera-LiDAR sensor fusion is the process of combining the data from multiple sensors, such as cameras and LiDARs, to improve the accuracy and reliability of the tracking system. This is used to improve the detection and tracking of objects in the environment.
+
+Results:
+The achieved RMSEs of 0.15, 0.12, and 0.19 for the three tracks suggest that the implemented tracking system was able to accurately estimate the positions of the tracked vehicles. These values indicate that the system is able to estimate the positions of the tracked objects with high accuracy, which is essential for safe and reliable autonomous driving.
+![image](https://user-images.githubusercontent.com/38068231/232808317-404ec9d2-4165-438e-84d8-c79059dcd8a2.png)
+
+some sensor detections led to initialized tracks of objects that were not vehicles. However, these false positive tracks did not reach the track status of "confirmed", which indicates that the data association algorithm was successful in rejecting these false positives and only confirmed tracks from actual vehicles. This is a desirable outcome for any tracking system, as it helps to avoid potential safety hazards or false alarms in the system.
+
+![image](https://user-images.githubusercontent.com/38068231/232809262-db947b82-3319-4af0-9ead-470370b7b284.png)
+![image](https://user-images.githubusercontent.com/38068231/232809351-0ca7c96d-f7b8-46c5-a8b5-a64642393668.png)
+![image](https://user-images.githubusercontent.com/38068231/232809374-7619884b-a096-4f70-8528-79e38feee4f4.png)
+![image](https://user-images.githubusercontent.com/38068231/232809401-43d6bf30-82f2-4f54-bd93-96c389cdcdad.png)
+
+This is the RMSE result when combining the two sensors: 
+![image](https://user-images.githubusercontent.com/38068231/232809563-54261454-8b8b-4b4d-9cb0-2c0adf28274e.png)
+
+Regarding the camera-LiDAR sensor fusion, the results show that there were no significant benefits in terms of RMSE compared to LiDAR-only tracking. However, in theory, camera-LiDAR fusion should provide some benefits over LiDAR-only tracking. For instance, cameras can provide color information and better resolution for object recognition, while LiDAR sensors can provide accurate distance and depth information. Combining these two sensors should lead to better object recognition and tracking performance, especially in complex environments with occlusions and varying lighting conditions.
+
+Therefore, further investigation is needed to identify the reasons why the implemented camera-LiDAR fusion algorithm did not provide significant benefits in this particular project. It could be due to factors such as the specific sensors used, the calibration between the sensors, or the algorithm parameters.
+
+Sensor fusion systems face various challenges in real-life scenarios, such as:
+
+Sensor Calibration: Sensors may have different calibration parameters that need to be accurately estimated and aligned to provide accurate and consistent data. Sensor calibration errors can lead to inaccuracies in the tracking system.
+
+Sensor Occlusion: Objects in the environment can obstruct the sensors' field of view, leading to incomplete or inaccurate data. Sensor fusion algorithms need to handle such occlusions and estimate the position and velocity of the objects even when they are partially visible.
+
+Environmental Conditions: The performance of sensors can be affected by environmental conditions such as rain, fog, and bright sunlight. Sensor fusion algorithms should be able to handle such conditions and provide reliable tracking results.
+
+During the project, a problem was encountered with sensor occlusion, particularly with the LiDAR sensor. Many vehicles in the environment were not being detected by the LiDAR sensor, which made it impossible to track them accurately. However, these vehicles were visible in the camera data. This posed a challenge for the data association algorithm since it was unable to confirm the tracks of these vehicles due to a lack of consistent measurements from the LiDAR sensor. The occlusion problem highlights the importance of using complementary sensors, such as cameras, in a sensor fusion system to improve object detection and tracking performance, particularly in scenarios where occlusions are common.
+
+To address the occlusion problem in the LiDAR sensor, one possible approach is to increase the score of the tracks detected by the camera even if they are not detected by the LiDAR consistently. This would require modifying the data association algorithm to consider both camera and LiDAR data, giving more weight to the camera data in occluded areas. It may also be possible to predict areas of occlusion in the LiDAR data based on the camera detections and adjust the data association algorithm accordingly to be more permissive in those areas with the detections of the camera. Such an approach would require careful consideration and testing to ensure that false positives are minimized while maintaining a high level of accuracy in the tracking system.

@@ -34,21 +34,15 @@ class Track:
         # unassigned measurement transformed from sensor to vehicle coordinates
         # - initialize track state and track score with appropriate values
         ############
+        
+        self.x = np.zeros((6,1))
+        self.x[:3] = meas.z[:3]
+        self.P = np.zeros((6,6))
+        self.P[:3,:3] = M_rot*meas.R*M_rot.T
+        self.P[3:,3:] = np.matrix([[params.sigma_p44,0,0],[0,params.sigma_p55,0],[0,0,params.sigma_p66]])
 
-        self.x = np.matrix([[49.53980697],
-                        [ 3.41006279],
-                        [ 0.91790581],
-                        [ 0.        ],
-                        [ 0.        ],
-                        [ 0.        ]])
-        self.P = np.matrix([[9.0e-02, 0.0e+00, 0.0e+00, 0.0e+00, 0.0e+00, 0.0e+00],
-                        [0.0e+00, 9.0e-02, 0.0e+00, 0.0e+00, 0.0e+00, 0.0e+00],
-                        [0.0e+00, 0.0e+00, 6.4e-03, 0.0e+00, 0.0e+00, 0.0e+00],
-                        [0.0e+00, 0.0e+00, 0.0e+00, 2.5e+03, 0.0e+00, 0.0e+00],
-                        [0.0e+00, 0.0e+00, 0.0e+00, 0.0e+00, 2.5e+03, 0.0e+00],
-                        [0.0e+00, 0.0e+00, 0.0e+00, 0.0e+00, 0.0e+00, 2.5e+01]])
-        self.state = 'confirmed'
-        self.score = 0
+        self.state = 'initialized'
+        self.score = 1.0/params.window
         
         ############
         # END student code
@@ -100,17 +94,24 @@ class Trackmanagement:
         # feel free to define your own parameters)
         ############
         
+        tracks_to_delete = []
         # decrease score for unassigned tracks
         for i in unassigned_tracks:
             track = self.track_list[i]
             # check visibility    
             if meas_list: # if not empty
                 if meas_list[0].sensor.in_fov(track.x):
-                    # your code goes here
-                    pass 
-
+                    track.score-=1/params.window
+                    if track.state == 'confirmed' and track.score < params.delete_threshold: # only tracks with decreasing score are candidates for delete
+                        tracks_to_delete.append(track)
+            if track.P[0,0] > params.max_P or track.P[1,1] > params.max_P:
+                if not tracks_to_delete.__contains__(track):
+                    tracks_to_delete.append(track)
+            elif track.score < 0 and not tracks_to_delete.__contains__(track):
+                tracks_to_delete.append(track)
         # delete old tracks   
-
+        for track in tracks_to_delete:
+            self.delete_track(track)
         ############
         # END student code
         ############ 
@@ -139,8 +140,11 @@ class Trackmanagement:
         # - increase track score
         # - set track state to 'tentative' or 'confirmed'
         ############
-
-        pass
+        track.score+=1/params.window
+        if track.score > params.confirmed_threshold:
+            track.state='confirmed'
+        else:
+            track.state='tentative'
         
         ############
         # END student code

@@ -39,7 +39,7 @@ class Track:
         self.x[:3] = meas.z[:3]
         self.P = np.zeros((6,6))
         self.P[:3,:3] = M_rot*meas.R*M_rot.T
-        self.P[3:,3:] = np.matrix([[params.sigma_p44,0,0],[0,params.sigma_p55,0],[0,0,params.sigma_p66]])
+        self.P[3:,3:] = np.matrix([[params.sigma_p44**2,0,0],[0,params.sigma_p55**2,0],[0,0,params.sigma_p66**2]])
 
         self.state = 'initialized'
         self.score = 1.0/params.window

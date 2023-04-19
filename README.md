@@ -232,6 +232,8 @@ some sensor detections led to initialized tracks of objects that were not vehicl
 
 This is the RMSE result when combining the two sensors: 
 ![image](https://user-images.githubusercontent.com/38068231/232809563-54261454-8b8b-4b4d-9cb0-2c0adf28274e.png)
+![image](https://user-images.githubusercontent.com/38068231/233050637-43a85eda-c2e7-4597-a24a-a297db42663a.png)
+
 
 Regarding the camera-LiDAR sensor fusion, the results show that there were no significant benefits in terms of RMSE compared to LiDAR-only tracking. However, in theory, camera-LiDAR fusion should provide some benefits over LiDAR-only tracking. For instance, cameras can provide color information and better resolution for object recognition, while LiDAR sensors can provide accurate distance and depth information. Combining these two sensors should lead to better object recognition and tracking performance, especially in complex environments with occlusions and varying lighting conditions.
 

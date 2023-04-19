@@ -211,6 +211,15 @@ Data association: Data association is the process of associating sensor measurem
 Camera-LiDAR sensor fusion: Camera-LiDAR sensor fusion is the process of combining the data from multiple sensors, such as cameras and LiDARs, to improve the accuracy and reliability of the tracking system. This is used to improve the detection and tracking of objects in the environment.
 
 Results:
+Filter RMSE plot:
+![image](https://user-images.githubusercontent.com/38068231/233007605-469b491f-175d-4286-b37b-94459d2a19ba.png)
+
+Track Management RMSE plot:
+![image](https://user-images.githubusercontent.com/38068231/233009522-18147f34-7529-480f-9d52-9f731eb8fb73.png)
+
+
+
+
 The achieved RMSEs of 0.15, 0.12, and 0.19 for the three tracks suggest that the implemented tracking system was able to accurately estimate the positions of the tracked vehicles. These values indicate that the system is able to estimate the positions of the tracked objects with high accuracy, which is essential for safe and reliable autonomous driving.
 ![image](https://user-images.githubusercontent.com/38068231/232808317-404ec9d2-4165-438e-84d8-c79059dcd8a2.png)
 
@@ -223,6 +232,8 @@ some sensor detections led to initialized tracks of objects that were not vehicl
 
 This is the RMSE result when combining the two sensors: 
 ![image](https://user-images.githubusercontent.com/38068231/232809563-54261454-8b8b-4b4d-9cb0-2c0adf28274e.png)
+![image](https://user-images.githubusercontent.com/38068231/233050637-43a85eda-c2e7-4597-a24a-a297db42663a.png)
+
 
 Regarding the camera-LiDAR sensor fusion, the results show that there were no significant benefits in terms of RMSE compared to LiDAR-only tracking. However, in theory, camera-LiDAR fusion should provide some benefits over LiDAR-only tracking. For instance, cameras can provide color information and better resolution for object recognition, while LiDAR sensors can provide accurate distance and depth information. Combining these two sensors should lead to better object recognition and tracking performance, especially in complex environments with occlusions and varying lighting conditions.
 
